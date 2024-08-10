@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from '../styles';
+import styles from '../../styles';
 
 const BookmarkedNFTs = ({navigation}) => {
   const [bookmarks, setBookmarks] = useState([]);

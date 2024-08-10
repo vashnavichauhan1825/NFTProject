@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 import {fetchNFTs} from '../services/service';
-import styles from '../styles';
+import styles from '../../styles';
 
 const AllNFTs = ({navigation}) => {
   const [nfts, setNfts] = useState([]);
