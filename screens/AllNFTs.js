@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 import {fetchNFTs} from '../services/service';
+import colors from '../colors';
+import styles from '../styles';
 
 const AllNFTs = ({navigation}) => {
   const [nfts, setNfts] = useState([]);
@@ -16,14 +18,15 @@ const AllNFTs = ({navigation}) => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('NFTDetails', {nft: item.nft_data})}>
-      <View
-        style={{padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc'}}>
+      <View style={styles.cardContainer}>
         <Image
           source={{uri: item.nft_data.external_data.image}}
-          style={{width: 100, height: 100}}
+          style={styles.image}
         />
-        <Text>{item.nft_data.external_data.name}</Text>
-        <Text>{item.nft_data.current_owner}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{item.nft_data.external_data.name}</Text>
+          <Text style={styles.terText}>{item.nft_data.current_owner}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
