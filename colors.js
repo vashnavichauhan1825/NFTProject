@@ -1,6 +1,6 @@
 export default {
-  cta: '#a7bea9',
-  primary: '#ffffff',
-  secondary: '#000000',
-  tertiary: '#d9e3da',
+  cta: '#dd44b9',
+  primary: '#fff',
+  secondary: '#0d0d0f',
+  tertiary: '#6c6c6c',
 };

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 import {fetchNFTs} from '../services/service';
-import colors from '../colors';
 import styles from '../styles';
 
 const AllNFTs = ({navigation}) => {
@@ -25,7 +24,9 @@ const AllNFTs = ({navigation}) => {
         />
         <View style={styles.textContainer}>
           <Text style={styles.title}>{item.nft_data.external_data.name}</Text>
-          <Text style={styles.terText}>{item.nft_data.current_owner}</Text>
+          <Text style={styles.terText} numberOfLines={1}>
+            {item.nft_data.current_owner}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

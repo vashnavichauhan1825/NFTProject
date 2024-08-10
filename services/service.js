@@ -16,7 +16,6 @@ export const fetchNFTs = async (page = 0, pageSize = 10) => {
   });
 
   const items = response.data.data.items;
-  console.log('data', items[0]);
   return items.map(item => ({
     contract_address: item.contract_address,
     contract_name: item.contract_name,

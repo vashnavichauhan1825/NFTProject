@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: colors.cta,
+    fontWeight: '700',
+    color: colors.primary,
   },
   terText: {
     color: colors.tertiary,
-    fontSize: 12,
+    fontSize: 16,
   },
   image: {
     width: 150,
