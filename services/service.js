@@ -14,6 +14,19 @@ export const fetchNFTs = async (page = 0, pageSize = 10) => {
       password: '',
     },
   });
-  console.info('checking data', response.data.data.items);
-  return response.data.data.items;
+
+  const items = response.data.data.items;
+  console.log('data', items[0]);
+  return items.map(item => ({
+    contract_address: item.contract_address,
+    contract_name: item.contract_name,
+    nft_data: {
+      token_id: item.nft_data.token_id,
+      current_owner: item.nft_data.current_owner,
+      external_data: {
+        name: item.nft_data.external_data.name,
+        image: item.nft_data.external_data.image,
+      },
+    },
+  }));
 };

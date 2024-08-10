@@ -1,40 +1,39 @@
-import {useEffect} from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {useEffect, useState} from 'react';
+import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
 import {fetchNFTs} from './services/service';
 
 const App = () => {
+  const [nfts, setNfts] = useState([]);
+
   useEffect(() => {
     const loadNFTs = async () => {
       const data = await fetchNFTs();
-      console.log(data);
+      setNfts(data);
     };
     loadNFTs();
   }, []);
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>Hello, Vashnavi cha</Text>
+
+  const renderItem = ({item}) => (
+    <TouchableOpacity>
+      <View
+        style={{padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc'}}>
+        <Image
+          source={{uri: item.nft_data.external_data.image}}
+          style={{width: 100, height: 100}}
+        />
+        <Text>{item.nft_data.external_data.name}</Text>
+        <Text>{item.nft_data.current_owner}</Text>
       </View>
-    </SafeAreaView>
+    </TouchableOpacity>
+  );
+
+  return (
+    <FlatList
+      data={nfts}
+      renderItem={renderItem}
+      keyExtractor={item => item.nft_data.token_id.toString()}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-  box: {
-    padding: 20,
-    backgroundColor: 'red',
-    borderRadius: 10,
-  },
-  text: {
-    fontSize: 20,
-    color: '#fff',
-  },
-});
 
 export default App;
