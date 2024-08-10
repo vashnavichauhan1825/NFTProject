@@ -1,32 +1,53 @@
-import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image, Button} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const NFTDetails = () => {
+const NFTDetails = ({route}) => {
+  const {nft} = route.params;
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    const checkBookmark = async () => {
+      const bookmarks = JSON.parse(
+        (await AsyncStorage.getItem('bookmarks')) || '[]',
+      );
+      setIsBookmarked(bookmarks.some(item => item.token_id === nft.token_id));
+    };
+    checkBookmark();
+  }, [nft.token_id]);
+
+  const toggleBookmark = async () => {
+    let bookmarks = JSON.parse(
+      (await AsyncStorage.getItem('bookmarks')) || '[]',
+    );
+    if (isBookmarked) {
+      bookmarks = bookmarks.filter(item => item.token_id !== nft.token_id);
+    } else {
+      bookmarks.push(nft);
+    }
+    await AsyncStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    setIsBookmarked(!isBookmarked);
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>NFTDetails</Text>
-      </View>
-    </SafeAreaView>
+    <View>
+      <Image
+        source={{uri: nft.external_data.image}}
+        style={{width: 200, height: 200}}
+      />
+      <Text>{nft.external_data.name}</Text>
+      <Text>Description: {nft.external_data.description}</Text>
+      <Text>Current Owner : {nft.current_owner}</Text>
+      <Text>Asset Type : {nft.external_data.assetType}</Text>
+      <Text>Asset Size : {nft.external_data.assetSize}</Text>
+      <Text>External Url : {nft.external_data.externalURL}</Text>
+
+      <Button
+        title={isBookmarked ? 'Unbookmark' : 'Bookmark'}
+        onPress={toggleBookmark}
+      />
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  box: {
-    padding: 20,
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-  },
-  text: {
-    fontSize: 20,
-    color: '#fff',
-  },
-});
 
 export default NFTDetails;

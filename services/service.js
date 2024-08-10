@@ -26,6 +26,10 @@ export const fetchNFTs = async (page = 0, pageSize = 10) => {
       external_data: {
         name: item.nft_data.external_data.name,
         image: item.nft_data.external_data.image,
+        description: item.nft_data.external_data.description,
+        assetType: item.nft_data.external_data.asset_file_extension,
+        assetSize: item.nft_data.external_data.asset_size_bytes,
+        externalURL: item.nft_data.external_data.external_url,
       },
     },
   }));
