@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Linking} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../../styles';
 import colors from '../../colors';
@@ -51,7 +51,9 @@ const NFTDetails = ({route}) => {
         <Text style={styles.terText}>
           Asset Size : {nft.external_data.assetSize}
         </Text>
-        <Text style={styles.terText}>
+        <Text
+          style={styles.terText}
+          onPress={() => Linking.openURL(nft.external_data.externalURL)}>
           External Url : {nft.external_data.externalURL}
         </Text>
       </View>

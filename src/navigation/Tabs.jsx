@@ -1,11 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {AppStack} from './Stack';
-import BookmarkedNFTs from '../screens/BookmarkedNFTs';
+import {AppStack, BookmarkStack} from './Stack';
 import colors from '../../colors';
 import Saved from '../assets/images/saved.svg';
 import List from '../assets/images/list.svg';
 import {SVGImage} from '../components/SVGImage';
+import styles from '../../styles';
 const Tab = createBottomTabNavigator();
 
 const tabBarStyle = {
@@ -21,7 +21,10 @@ const renderTabBarIcon = assetSrc => () =>
 
 export const AppTabs = () => {
   return (
-    <Tab.Navigator screenOptions={{tabBarStyle}}>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle,
+      }}>
       <Tab.Screen
         name="NFTs"
         component={AppStack}
@@ -33,11 +36,13 @@ export const AppTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Bookmarks"
-        component={BookmarkedNFTs}
+        name="AllBookmarks"
+        component={BookmarkStack}
         options={{
           tabBarLabel: 'Bookmarks',
+          headerShown: false,
           tabBarActiveTintColor: colors.primary,
+          headerStyle: {backgroundColor: styles.bgSec},
           tabBarIcon: renderTabBarIcon(Saved),
         }}
       />

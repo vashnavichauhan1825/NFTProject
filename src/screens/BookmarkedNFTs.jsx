@@ -31,7 +31,7 @@ const BookmarkedNFTs = ({navigation}) => {
   );
 
   return (
-    <View>
+    <View style={[styles.bgTer, styles.flex]}>
       <FlatList
         data={bookmarks}
         renderItem={renderItem}

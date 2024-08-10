@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
-import {fetchNFTs} from '../services/service';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from '../../styles';
+import {fetchNFTs} from '../services/service';
 
 const AllNFTs = ({navigation}) => {
   const [nfts, setNfts] = useState([]);
@@ -33,11 +33,13 @@ const AllNFTs = ({navigation}) => {
   );
 
   return (
-    <FlatList
-      data={nfts}
-      renderItem={renderItem}
-      keyExtractor={item => item.nft_data.token_id.toString()}
-    />
+    <View style={styles.bgTer}>
+      <FlatList
+        data={nfts}
+        renderItem={renderItem}
+        keyExtractor={item => item.nft_data.token_id.toString()}
+      />
+    </View>
   );
 };
 

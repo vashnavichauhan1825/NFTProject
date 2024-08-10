@@ -4,6 +4,7 @@ import {SCREENS, SCREEN_TITLE} from '../utils/Constants';
 import colors from '../../colors';
 import AllNFTs from '../screens/AllNFTs';
 import NFTDetails from '../screens/NFTDetails';
+import BookmarkedNFTs from '../screens/BookmarkedNFTs';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ export const AppStack = () => {
       screenOptions={{
         headerStyle,
         headerTitleStyle,
+        headerTintColor: colors.primary,
       }}>
       <Stack.Screen
         name={SCREENS.NFTS}
@@ -26,6 +28,22 @@ export const AppStack = () => {
         name={SCREENS.DETAILS}
         component={NFTDetails}
         options={{title: SCREEN_TITLE.NFT_DETAIL}}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export const BookmarkStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle,
+        headerTitleStyle,
+      }}>
+      <Stack.Screen
+        name={SCREENS.BOOKMARK}
+        component={BookmarkedNFTs}
+        options={{title: SCREEN_TITLE.BOOKMARK}}
       />
     </Stack.Navigator>
   );
