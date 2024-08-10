@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, Button} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from '../styles';
+import colors from '../colors';
 
 const NFTDetails = ({route}) => {
   const {nft} = route.params;
@@ -30,22 +32,41 @@ const NFTDetails = ({route}) => {
   };
 
   return (
-    <View>
+    <View style={styles.detailContainer}>
       <Image
         source={{uri: nft.external_data.image}}
-        style={{width: 200, height: 200}}
+        style={[styles.detailImg, styles.mt20]}
       />
-      <Text>{nft.external_data.name}</Text>
-      <Text>Description: {nft.external_data.description}</Text>
-      <Text>Current Owner : {nft.current_owner}</Text>
-      <Text>Asset Type : {nft.external_data.assetType}</Text>
-      <Text>Asset Size : {nft.external_data.assetSize}</Text>
-      <Text>External Url : {nft.external_data.externalURL}</Text>
-
-      <Button
-        title={isBookmarked ? 'Unbookmark' : 'Bookmark'}
-        onPress={toggleBookmark}
-      />
+      <View>
+        <Text style={[styles.title, styles.mt20, styles.textCenter]}>
+          {nft.external_data.name}
+        </Text>
+        <Text style={[styles.text, styles.mt20]}>
+          Description: {nft.external_data.description}
+        </Text>
+        <Text style={styles.text}>Current Owner : {nft.current_owner}</Text>
+        <Text style={[styles.terText, styles.mt20]}>
+          Asset Type : {nft.external_data.assetType}
+        </Text>
+        <Text style={styles.terText}>
+          Asset Size : {nft.external_data.assetSize}
+        </Text>
+        <Text style={styles.terText}>
+          External Url : {nft.external_data.externalURL}
+        </Text>
+      </View>
+      <View style={styles.mt20}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            {backgroundColor: isBookmarked ? colors.primary : colors.cta},
+          ]}
+          onPress={toggleBookmark}>
+          <Text style={styles.secText20}>
+            {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

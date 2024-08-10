@@ -14,6 +14,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 10,
   },
+  detailContainer: {
+    flex: 1,
+    backgroundColor: colors.secondary,
+    alignItems: 'center',
+  },
+  detailText: {
+    textAlign: 'left',
+  },
+  detailImg: {
+    width: 400,
+    height: 400,
+    borderRadius: 15,
+  },
   text: {
     color: colors.primary,
     fontSize: 18,
@@ -30,6 +43,24 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
+  },
+  button: {
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 5,
+    fontSize: 32,
+    textAlign: 'center',
+  },
+  mt20: {
+    marginTop: 20,
+  },
+  secText20: {
+    color: colors.secondary,
+    fontSize: 20,
+  },
+  textCenter: {
+    textAlign: 'center',
   },
 });
 
