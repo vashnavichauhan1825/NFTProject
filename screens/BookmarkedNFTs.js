@@ -1,32 +1,44 @@
-import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from '../styles';
 
-const BookmarkedNFTs = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>Bookmarked PAGE</Text>
+const BookmarkedNFTs = ({navigation}) => {
+  const [bookmarks, setBookmarks] = useState([]);
+
+  useEffect(() => {
+    const loadBookmarks = async () => {
+      const storedBookmarks = JSON.parse(
+        (await AsyncStorage.getItem('bookmarks')) || '[]',
+      );
+      setBookmarks(storedBookmarks);
+    };
+    const unsubscribe = navigation.addListener('focus', loadBookmarks);
+    return unsubscribe;
+  }, [navigation]);
+
+  const renderItem = ({item}) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('NFTDetails', {nft: item})}>
+      <View style={styles.cardContainer}>
+        <Image source={{uri: item.external_data.image}} style={styles.image} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{item.external_data.name}</Text>
+          <Text style={styles.terText}>{item.current_owner}</Text>
+        </View>
       </View>
-    </SafeAreaView>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View>
+      <FlatList
+        data={bookmarks}
+        renderItem={renderItem}
+        keyExtractor={item => item.token_id.toString()}
+      />
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  box: {
-    padding: 20,
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-  },
-  text: {
-    fontSize: 20,
-    color: '#fff',
-  },
-});
 
 export default BookmarkedNFTs;

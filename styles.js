@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
   },
+  bgSec: {
+    backgroundColor: colors.secondary,
+  },
   mt20: {
     marginTop: 20,
   },
