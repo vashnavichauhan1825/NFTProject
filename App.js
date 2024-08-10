@@ -1,39 +1,44 @@
-import {useEffect, useState} from 'react';
-import {FlatList, View, Text, Image, TouchableOpacity} from 'react-native';
-import {fetchNFTs} from './services/service';
-
-const App = () => {
-  const [nfts, setNfts] = useState([]);
-
-  useEffect(() => {
-    const loadNFTs = async () => {
-      const data = await fetchNFTs();
-      setNfts(data);
-    };
-    loadNFTs();
-  }, []);
-
-  const renderItem = ({item}) => (
-    <TouchableOpacity>
-      <View
-        style={{padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc'}}>
-        <Image
-          source={{uri: item.nft_data.external_data.image}}
-          style={{width: 100, height: 100}}
-        />
-        <Text>{item.nft_data.external_data.name}</Text>
-        <Text>{item.nft_data.current_owner}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
+import AllNFTs from './screens/AllNFTs';
+import NFTDetails from './screens/NFTDetails';
+import BookmarkedNFTs from './screens/BookmarkedNFTs';
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+function NFTStack() {
   return (
-    <FlatList
-      data={nfts}
-      renderItem={renderItem}
-      keyExtractor={item => item.nft_data.token_id.toString()}
-    />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="AllNFTs"
+        component={AllNFTs}
+        options={{title: 'All NFTs'}}
+      />
+      <Stack.Screen
+        name="NFTDetails"
+        component={NFTDetails}
+        options={{title: 'NFT Details'}}
+      />
+    </Stack.Navigator>
   );
-};
+}
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="NFTs"
+          component={NFTStack}
+          options={{title: 'All NFTs'}}
+        />
+        <Tab.Screen
+          name="Bookmarks"
+          component={BookmarkedNFTs}
+          options={{title: 'Bookmarked NFTs'}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
