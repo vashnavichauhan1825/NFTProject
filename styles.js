@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
     color: colors.tertiary,
     fontSize: 16,
   },
+  emptyText: {
+    color: colors.primary,
+    textAlign: 'center',
+    marginTop: 200,
+    fontSize: 20,
+  },
   image: {
     width: 150,
     height: 150,

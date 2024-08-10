@@ -24,7 +24,9 @@ const BookmarkedNFTs = ({navigation}) => {
         <Image source={{uri: item.external_data.image}} style={styles.image} />
         <View style={styles.textContainer}>
           <Text style={styles.title}>{item.external_data.name}</Text>
-          <Text style={styles.terText}>{item.current_owner}</Text>
+          <Text style={styles.terText} numberOfLines={1}>
+            {item.current_owner}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -32,11 +34,17 @@ const BookmarkedNFTs = ({navigation}) => {
 
   return (
     <View style={[styles.bgTer, styles.flex]}>
-      <FlatList
-        data={bookmarks}
-        renderItem={renderItem}
-        keyExtractor={item => item.token_id.toString()}
-      />
+      {bookmarks.length > 0 ? (
+        <FlatList
+          data={bookmarks}
+          renderItem={renderItem}
+          keyExtractor={item => item.token_id.toString()}
+        />
+      ) : (
+        <Text style={styles.emptyText}>
+          You haven't bookmarked anything yet !
+        </Text>
+      )}
     </View>
   );
 };
