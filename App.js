@@ -1,11 +1,19 @@
-import React from 'react';
+import {useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {fetchNFTs} from './services/service';
 
 const App = () => {
+  useEffect(() => {
+    const loadNFTs = async () => {
+      const data = await fetchNFTs();
+      console.log(data);
+    };
+    loadNFTs();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.text}>Hello, Vashnavi chauhan</Text>
+        <Text style={styles.text}>Hello, Vashnavi cha</Text>
       </View>
     </SafeAreaView>
   );
