@@ -1,79 +1,70 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# NFT-PROJECT
 
-# Getting Started
+## Introduction
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+NFT project is a React Native mobile application that showcases the **DeGods NFT collection**. The app retrieves data from an API and displays a list of NFTs, allowing users to view detailed information, bookmark their favorite NFTs, and manage their bookmarks.
 
-## Step 1: Start the Metro Server
+Built using React Native
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Installing NFTProject
 
-To start Metro, run the following command from the _root_ of your React Native project:
-
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+Clone the project
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+ $ git clone https://github.com/vashnavichauhan1825/NFTProject.git
 ```
 
-### For iOS
+Go to the project directory
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+ $ cd NFTProject
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Install dependencies
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```bash
+ $ yarn
+```
 
-## Step 3: Modifying your App
+or
 
-Now that you have successfully run the app, let's modify it.
+```bash
+$ npm install
+```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+```bash
+$ cd ios/pod install
+```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+Start the server
 
-## Congratulations! :tada:
+```bash
+  yarn android
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+```bash
+  yarn ios
+```
 
-### Now what?
+## Tech Stack
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+React Native
 
-# Troubleshooting
+## Color Reference
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+User Color Palette user `colors.js` for reference
 
-# Learn More
+| Color          | Hex                                                              |
+| -------------- | ---------------------------------------------------------------- |
+| Primary Dark   | ![#fff](https://via.placeholder.com/10/fff?text=+) #fff          |
+| Secondary Dark | ![#0d0d0f](https://via.placeholder.com/10/0d0d0f?text=+) #0d0d0f |
+| CTA DARK       | ![#dd44b9](https://via.placeholder.com/10/dd44b9?text=+) #dd44b9 |
+| TERTIARY Dark  | ![#6c6c6c](https://via.placeholder.com/10/6c6c6c?text=+) #6c6c6c |
 
-To learn more about React Native, take a look at the following resources:
+## Sample ENV
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+```
+API_TOKEN=<YOUR_TOKEN>
+CONTRACT_ADDRESS=<YOUR_CONTRACT_ADDRESS>
+BASE_URL=<YOUR_BASE_URL>
+```
