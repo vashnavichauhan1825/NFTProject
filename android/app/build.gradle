@@ -83,6 +83,12 @@ android {
         versionName "1.0"
     }
     signingConfigs {
+        release {
+         storeFile file('your_key_name.keystore')
+         storePassword 'reactnative123'
+         keyAlias 'your_key_name'
+         keyPassword 'reactnative123'
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
