@@ -6,55 +6,67 @@ import colors from '../../colors';
 
 const NFTDetails = ({route}) => {
   const {nft} = route.params;
+
+  const {
+    token_id,
+    current_owner,
+    external_data: {
+      image,
+      name,
+      description,
+      assetType,
+      assetSize,
+      externalURL,
+    },
+  } = nft;
+
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
-    const checkBookmark = async () => {
-      const bookmarks = JSON.parse(
+    (async () => {
+      const storedBookmarks = JSON.parse(
         (await AsyncStorage.getItem('bookmarks')) || '[]',
       );
-      setIsBookmarked(bookmarks.some(item => item.token_id === nft.token_id));
-    };
-    checkBookmark();
-  }, [nft.token_id]);
+      setIsBookmarked(storedBookmarks.some(item => item.token_id === token_id));
+    })();
+  }, [token_id]);
 
   const toggleBookmark = async () => {
-    let bookmarks = JSON.parse(
+    let storedBookmarks = JSON.parse(
       (await AsyncStorage.getItem('bookmarks')) || '[]',
     );
+
     if (isBookmarked) {
-      bookmarks = bookmarks.filter(item => item.token_id !== nft.token_id);
+      storedBookmarks = storedBookmarks.filter(
+        item => item.token_id !== token_id,
+      );
     } else {
-      bookmarks.push(nft);
+      storedBookmarks.push(nft);
     }
-    await AsyncStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+    await AsyncStorage.setItem('bookmarks', JSON.stringify(storedBookmarks));
     setIsBookmarked(!isBookmarked);
   };
 
   return (
     <View style={styles.detailContainer}>
-      <Image
-        source={{uri: nft.external_data.image}}
-        style={[styles.detailImg, styles.mt20]}
-      />
+      <Image source={{uri: image}} style={[styles.detailImg, styles.mt20]} />
       <View>
         <Text style={[styles.title, styles.mt20, styles.textCenter]}>
-          {nft.external_data.name}
+          {name}
         </Text>
         <Text style={[styles.text, styles.mt20]}>
-          Description: {nft.external_data.description}
+          Description: {description}
         </Text>
-        <Text style={styles.text}>Current Owner : {nft.current_owner}</Text>
+        <Text style={styles.text}>Current Owner: {current_owner}</Text>
         <Text style={[styles.terText, styles.mt20]}>
-          Asset Type : {nft.external_data.assetType}
+          Asset Type: {assetType}
         </Text>
-        <Text style={styles.terText}>
-          Asset Size : {nft.external_data.assetSize}
-        </Text>
+        <Text style={styles.terText}>Asset Size: {assetSize}</Text>
         <Text
           style={styles.terText}
-          onPress={() => Linking.openURL(nft.external_data.externalURL)}>
-          External Url : {nft.external_data.externalURL}
+          onPress={() => Linking.openURL(externalURL)}>
+          External URL: {externalURL}
         </Text>
       </View>
       <View style={styles.mt20}>

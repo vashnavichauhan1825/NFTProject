@@ -5,13 +5,14 @@ const BookmarkedNFTs = ({navigation}) => {
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    const loadBookmarks = async () => {
-      const storedBookmarks = JSON.parse(
-        (await AsyncStorage.getItem('bookmarks')) || '[]',
-      );
-      setBookmarks(storedBookmarks);
-    };
-    const unsubscribe = navigation.addListener('focus', loadBookmarks);
+    const unsubscribe = navigation.addListener('focus', () => {
+      (async () => {
+        const storedBookmarks = JSON.parse(
+          (await AsyncStorage.getItem('bookmarks')) || '[]',
+        );
+        setBookmarks(storedBookmarks);
+      })();
+    });
     return unsubscribe;
   }, [navigation]);
 
