@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   detailContainer: {
-    flex: 1,
     backgroundColor: colors.secondary,
     alignItems: 'center',
   },
@@ -55,6 +54,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    marginBottom: 20,
     borderRadius: 5,
     fontSize: 32,
     textAlign: 'center',
@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
 
   bgTer: {
     backgroundColor: colors.tertiary,
+  },
+  ph10: {
+    paddingHorizontal: 10,
   },
   mt20: {
     marginTop: 20,

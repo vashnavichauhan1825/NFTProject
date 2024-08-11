@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, Linking} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Linking,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../../styles';
 import colors from '../../colors';
@@ -49,39 +57,43 @@ const NFTDetails = ({route}) => {
   };
 
   return (
-    <View style={styles.detailContainer}>
-      <Image source={{uri: image}} style={[styles.detailImg, styles.mt20]} />
-      <View>
-        <Text style={[styles.title, styles.mt20, styles.textCenter]}>
-          {name}
-        </Text>
-        <Text style={[styles.text, styles.mt20]}>
-          Description: {description}
-        </Text>
-        <Text style={styles.text}>Current Owner: {current_owner}</Text>
-        <Text style={[styles.terText, styles.mt20]}>
-          Asset Type: {assetType}
-        </Text>
-        <Text style={styles.terText}>Asset Size: {assetSize}</Text>
-        <Text
-          style={styles.terText}
-          onPress={() => Linking.openURL(externalURL)}>
-          External URL: {externalURL}
-        </Text>
-      </View>
-      <View style={styles.mt20}>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            {backgroundColor: isBookmarked ? colors.primary : colors.cta},
-          ]}
-          onPress={toggleBookmark}>
-          <Text style={styles.secText20}>
-            {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+    <SafeAreaView style={styles.flex}>
+      <ScrollView contentContainerStyle={[styles.detailContainer, styles.ph10]}>
+        <Image source={{uri: image}} style={[styles.detailImg, styles.mt20]} />
+        <View>
+          <Text style={[styles.title, styles.mt20, styles.textCenter]}>
+            {name}
           </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <Text style={[styles.text, styles.mt20]}>
+            Description: {description}
+          </Text>
+          <Text style={[styles.text, styles.mt20]}>
+            Current Owner: {current_owner}
+          </Text>
+          <Text style={[styles.terText, styles.mt20]}>
+            Asset Type: {assetType}
+          </Text>
+          <Text style={styles.terText}>Asset Size: {assetSize}</Text>
+          <Text
+            style={styles.terText}
+            onPress={() => Linking.openURL(externalURL)}>
+            External URL: {externalURL}
+          </Text>
+        </View>
+        <View style={styles.mt20}>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              {backgroundColor: isBookmarked ? colors.primary : colors.cta},
+            ]}
+            onPress={toggleBookmark}>
+            <Text style={styles.secText20}>
+              {isBookmarked ? 'Unbookmark' : 'Bookmark'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
